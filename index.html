@@ -13,8 +13,13 @@
         .feature-card { transition: transform 0.3s, box-shadow 0.3s; }
         .feature-card:hover { transform: translateY(-5px); }
         .glass-effect { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .feature-card:hover .fa-arrow-right {
+    transform: translateX(3px);
+    transition: transform 0.3s ease;
+}
     </style>
 </head>
+
 <body class="bg-gray-50">
     <div id="app">
         <!-- 新版导航栏 -->
@@ -109,6 +114,48 @@
                     </div>
                 </a>
             </div>
+            <!-- 在原有的三个功能模块之后继续添加 -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+    <!-- 原有三个模块... -->
+
+    <!-- 新增简历测评模块 -->
+    <a href="jianli.html" class="feature-card bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl">
+        <div class="text-amber-500 text-4xl mb-4">
+            <i class="fas fa-file-signature"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">AI简历测评</h3>
+        <div class="relative mb-4">
+            <div class="absolute inset-0 bg-gradient-to-r from-amber-100 to-amber-50 rounded-lg -rotate-1"></div>
+            <ul class="relative text-sm text-gray-600 space-y-2 p-4">
+                <li>✔ 智能内容评分</li>
+                <li>✔ 竞争力分析</li>
+                <li>✔ 一键优化建议</li>
+            </ul>
+        </div>
+        <div class="flex items-center text-amber-500">
+            <span>立即测评</span>
+            <i class="fas fa-arrow-right ml-2"></i>
+        </div>
+    </a>
+
+    <!-- 新增证书认证模块 -->
+    <a href="cailiao.html" class="feature-card bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl">
+        <div class="text-cyan-500 text-4xl mb-4">
+            <i class="fas fa-award"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">证书认证中心</h3>
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 bg-cyan-50 text-cyan-600 rounded-full text-sm">技能认证</span>
+            <span class="px-3 py-1 bg-cyan-50 text-cyan-600 rounded-full text-sm">学历认证</span>
+            <span class="px-3 py-1 bg-cyan-50 text-cyan-600 rounded-full text-sm">项目认证</span>
+        </div>
+        <p class="text-sm text-gray-600">权威认证提升简历含金量，获得企业优先推荐</p>
+        <div class="flex items-center text-cyan-500 mt-4">
+            <span>立即认证</span>
+            <i class="fas fa-arrow-right ml-2"></i>
+        </div>
+    </a>
+</div>
 
 <!--            &lt;!&ndash; 新增数据看板 &ndash;&gt;-->
 <!--            <section class="bg-indigo-50 rounded-2xl p-8 mb-16">-->
