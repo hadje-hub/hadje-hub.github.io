@@ -180,6 +180,11 @@
     this.loadUserData(); // 加载用户数据
 },
 methods: {
+                deletePhoto() {
+    this.user.photo = null; // 清空照片路径
+    localStorage.removeItem('userPhotoUrl'); // 移除 localStorage 中存储的照片路径
+},
+
     loadUserData() {
         const storedUserData = localStorage.getItem('userData'); // 从 localStorage 获取用户数据
         if (storedUserData) {
