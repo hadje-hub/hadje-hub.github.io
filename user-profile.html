@@ -119,24 +119,7 @@ createApp({
         this.loadUserData(); // 加载用户数据
     },
     methods: {
-    loadUserData() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
-            window.location.href = 'login.html';
-        } else {
-            this.user = userData;
-
-            const storedVideoUrl = localStorage.getItem('userVideoUrl');
-            if (storedVideoUrl) {
-                this.user.video = storedVideoUrl;
-            }
-
-            const storedPhotoUrl = localStorage.getItem('userPhotoUrl');
-            if (storedPhotoUrl) {
-                this.user.photo = storedPhotoUrl;
-            }
-        }
-    },
+   
     goBack() {
         window.location.href = 'index.html';
     },
