@@ -103,11 +103,11 @@ createApp({
     data() {
         return {
             user: {
-                name: '',
-                dob: '',
-                education: '',
-                school: '',
-                major: '',
+                name: '张三', // 示例姓名
+                dob: '2000-01-01', // 示例出生日期
+                education: '本科', // 示例学历
+                school: '某大学', // 示例学校
+                major: '计算机科学', // 示例专业
                 photo: 'profile-photo.jpg', // 默认照片路径
                 video: null // 初始值为 null
             },
@@ -115,55 +115,47 @@ createApp({
             modalImage: '' // 用于存储放大后的图片路径
         };
     },
-    mounted() {
-        this.loadUserData(); // 加载用户数据
-    },
     methods: {
-   
-    goBack() {
-        window.location.href = 'index.html';
-    },
-    editInfo() {
-        window.location.href = 'edit-info.html'; // 添加跳转到 edit-info.html 的逻辑
-    },
-    deleteVideo() {
-        this.user.video = null;
-        localStorage.removeItem('userVideoUrl');
-    },
-    uploadPhoto(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                this.user.photo = e.target.result;
-                localStorage.setItem('userPhotoUrl', e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    },
-    uploadVideo(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const videoUrl = URL.createObjectURL(file);
-                this.user.video = videoUrl;
-                localStorage.setItem('userVideoUrl', videoUrl);
-            };
-            reader.readAsArrayBuffer(file);
-        }
-    },
-    openModal(image) {
-        this.modalImage = image;
-        this.modalVisible = true;
-    },
-    closeModal() {
-        this.modalVisible = false;
-    }
-
+        goBack() {
+            window.location.href = 'index.html'; // 返回主页逻辑
+        },
+        editInfo() {
+            window.location.href = 'edit-info.html'; // 跳转到编辑信息页面
+        },
+        deleteVideo() {
+            this.user.video = null; // 删除视频
+        },
+        uploadPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.user.photo = e.target.result; // 上传的照片预览
+                };
+                reader.readAsDataURL(file);
             }
-        }).mount('#app');
+        },
+        uploadVideo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const videoUrl = URL.createObjectURL(file);
+                    this.user.video = videoUrl; // 上传的视频预览
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        },
+        openModal(image) {
+            this.modalImage = image; // 显示放大的图片
+            this.modalVisible = true; // 打开模态框
+        },
+        closeModal() {
+            this.modalVisible = false; // 关闭模态框
+        }
 
+    }
+}).mount('#app');
 
     </script>
 </body>
