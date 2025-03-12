@@ -6,85 +6,146 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 自定义样式 */
-        .input-small {
-            font-size: 0.875rem; /* 更小的字体 */
+        /* 新增渐变背景和全局字体 */
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            font-family: 'Helvetica Neue', sans-serif;
         }
-        .photo-large {
-            width: 100px; /* 放大照片宽度 */
-            height: 100px; /* 放大照片高度 */
+
+        /* 卡片投影效果增强 */
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .info-large {
-            font-size: 1.125rem; /* 增大基本信息字体 */
+
+        /* 图片容器样式 */
+        .photo-container {
+            width: 200px;
+            height: 200px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
+
+        /* 删除按钮样式 */
+        .delete-btn {
+            position: absolute;
+            right: -12px;
+            top: -12px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .photo-wrapper:hover .delete-btn {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* 模态框动画 */
         .modal {
-            display: none; /* 隐藏模态框 */
-            position: fixed; /* 固定定位 */
-            z-index: 1000; /* 在上层显示 */
-            left: 0;
-            top: 0;
-            width: 100%; /* 全屏宽度 */
-            height: 100%; /* 全屏高度 */
-            overflow: auto; /* 可滚动 */
-            background-color: rgba(0, 0, 0, 0.8); /* 半透明背景 */
+            animation: modalFadeIn 0.3s ease;
         }
-        .modal-content {
-            margin: 15% auto; /* 上下边距 */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px; /* 最大宽度 */
-        }
-        .close {
-            color: #aaa; /* 关闭按钮颜色 */
-            float: right; /* 向右浮动 */
-            font-size: 28px; /* 字体大小 */
-            font-weight: bold; /* 字体加粗 */
-        }
-        .close:hover,
-        .close:focus {
-            color: white; /* 鼠标悬停、聚焦时颜色变为白色 */
-            text-decoration: none; /*去掉下划线*/
-            cursor: pointer; /* 鼠标悬停变为手型 */
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div id="app" class="container mx-auto p-8">
-        <button @click="goBack" class="mb-4 bg-gray-300 text-black px-4 py-2 rounded-md">返回</button>
+    <div id="app" class="container mx-auto p-8 max-w-4xl">
+        <button @click="goBack" class="mb-4 bg-white text-gray-600 px-4 py-2 rounded-lg card-shadow hover:bg-gray-50 transition-all duration-200 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            返回
+        </button>
 
-        <h1 class="text-4xl font-bold mb-6 text-center">用户个人信息</h1>
+        <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">个人信息</h1>
 
         <!-- 用户基本信息 -->
-        <section class="bg-white p-6 rounded-lg shadow-md mb-8 flex">
-            <div class="w-2/3 pr-4">
-                <h2 class="text-2xl font-semibold mb-2">基本信息</h2>
-                <p class="text-gray-900 info-large">姓名: {{ user.name }}</p>
-                <p class="text-gray-900 info-large">出生年月日: {{ user.dob }}</p>
-                <p class="text-gray-900 info-large">学历: {{ user.education }}</p>
-                <p class="text-gray-900 info-large">学校: {{ user.school }}</p>
-                <p class="text-gray-900 info-large">专业: {{ user.major }}</p>
-                <button @click="editInfo" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md text-sm">修改个人信息</button>
+        <section class="bg-white p-8 rounded-2xl card-shadow mb-8 flex items-start space-x-8">
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800 border-l-4 border-blue-500 pl-4">基本信息</h2>
+                <div class="space-y-3">
+                    <p class="text-gray-700 text-lg"><span class="font-semibold text-gray-600">姓名：</span>{{ user.name }}</p>
+                    <p class="text-gray-700 text-lg"><span class="font-semibold text-gray-600">出生日期：</span>{{ user.dob }}</p>
+                    <p class="text-gray-700 text-lg"><span class="font-semibold text-gray-600">学历：</span>{{ user.education }}</p>
+                    <p class="text-gray-700 text-lg"><span class="font-semibold text-gray-600">毕业院校：</span>{{ user.school }}</p>
+                    <p class="text-gray-700 text-lg"><span class="font-semibold text-gray-600">专业：</span>{{ user.major }}</p>
+                </div>
+                <button @click="editInfo" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-all duration-200 transform hover:scale-105">
+                    编辑信息
+                </button>
             </div>
-            <div class="w-1/3">
-                <h2 class="text-2xl font-semibold mb-4">个人照片</h2>
-                <input type="file" @change="uploadPhoto" accept="image/*" class="border-2 border-gray-200 p-2 w-full mb-4 input-small">
-                <img v-if="user.photo" :src="user.photo" alt="个人照片" class="rounded-lg photo-large object-cover cursor-pointer" @click="openModal(user.photo)"> <!-- 点击照片打开模态框 -->
+
+            <div class="relative">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800 border-l-4 border-blue-500 pl-4">个人照片</h2>
+                <div class="photo-wrapper relative">
+                    <!-- 上传按钮 -->
+                    <div v-if="!user.photo" class="upload-container">
+                        <label class="flex flex-col items-center px-4 py-6 bg-white text-blue-500 rounded-lg border-2 border-dashed border-blue-200 hover:border-blue-500 cursor-pointer transition-colors duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span class="text-sm">点击上传照片</span>
+                            <input type="file" @change="uploadPhoto" accept="image/*" class="hidden">
+                        </label>
+                    </div>
+
+                    <!-- 照片展示 -->
+                    <div v-else class="relative group">
+                        <img :src="user.photo" alt="个人照片"
+                             class="photo-container rounded-lg object-cover cursor-pointer hover:shadow-lg"
+                             @click="openModal(user.photo)">
+                        <button @click="deletePhoto" class="delete-btn bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- 面试视频展示区域 -->
-        <section class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-semibold mb-4">面试视频</h2>
-            <div class="video-container mb-4">
-                <video v-if="user.video" controls class="w-full h-64 rounded-lg">
-                    <source :src="user.video" type="video/mp4">
-                </video>
-            </div>
-            <input type="file" @change="uploadVideo" accept="video/*" class="border-2 border-gray-200 p-2 w-full mb-4 input-small">
-            <button v-if="user.video" @click="deleteVideo" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md text-sm">删除视频</button>
-            <p class="text-gray-600">感谢您的观看！。</p>
-        </section>
+<section class="bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold mb-4">面试视频（最多3个）</h2>
+
+    <!-- 视频列表 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <!-- 已上传视频 -->
+        <div v-for="(video, index) in user.videos" :key="index" class="relative group">
+            <video controls class="w-full h-48 rounded-lg object-cover">
+                <source :src="video" type="video/mp4">
+            </video>
+            <button @click="deleteVideo(index)"
+                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- 上传按钮（显示剩余可上传数量） -->
+        <div v-for="n in 3 - user.videos.length" :key="'upload-'+n" class="flex items-center justify-center">
+            <label class="w-full h-48 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 cursor-pointer transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 01221 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span class="text-sm text-gray-600">点击上传视频</span>
+                <input type="file" @change="uploadVideo($event, n)" accept="video/*" class="hidden">
+            </label>
+        </div>
+    </div>
+
+    <p class="text-gray-600">感谢您的观看！</p>
+</section>
 
         <!-- 模态框 -->
         <div id="myModal" class="modal" v-show="modalVisible">
@@ -108,32 +169,38 @@
                         school: '',
                         major: '',
                         photo: 'profile-photo.jpg', // 默认照片路径
-                        video: null // 初始值为 null
+                        video: null, // 初始值为 null
+                        videos: [] // 改为数组存储视频
                     },
                     modalVisible: false, // 模态框显示状态
                     modalImage: '' // 用于存储放大后的图片路径
                 };
             },
             mounted() {
-                this.loadUserData(); // 加载用户数据
-            },
-            methods: {
-                loadUserData() {
-                    const storedUserData = localStorage.getItem('userData');
-                    if (storedUserData) {
-                        this.user = JSON.parse(storedUserData); // 从 localStorage 中加载用户数据
-                    }
-                },
+    this.loadUserData(); // 加载用户数据
+},
+methods: {
+    loadUserData() {
+        const storedUserData = localStorage.getItem('userData'); // 从 localStorage 获取用户数据
+        if (storedUserData) {
+            this.user = JSON.parse(storedUserData); // 解析并赋值
+        }
+
+        const storedVideos = localStorage.getItem('userVideos'); // 保持原有的视频信息加载逻辑
+        if (storedVideos) {
+            this.user.videos = JSON.parse(storedVideos); // 加载视频数据
+        }
+    },
                 goBack() {
                     window.location.href = 'index.html';
                 },
                 editInfo() {
                     window.location.href = 'edit-info.html'; // 添加跳转到 edit-info.html 的逻辑
                 },
-                deleteVideo() {
-                    this.user.video = null;
-                    localStorage.removeItem('userVideoUrl');
-                },
+                deleteVideo(index) {
+        this.user.videos.splice(index, 1);
+        localStorage.setItem('userVideos', JSON.stringify(this.user.videos));
+    },
                 uploadPhoto(event) {
                     const file = event.target.files[0];
                     if (file) {
@@ -146,17 +213,15 @@
                     }
                 },
                 uploadVideo(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            const videoUrl = URL.createObjectURL(file);
-                            this.user.video = videoUrl;
-                            localStorage.setItem('userVideoUrl', videoUrl);
-                        };
-                        reader.readAsArrayBuffer(file);
-                    }
-                },
+        const file = event.target.files[0];
+        if (file && this.user.videos.length < 3) {
+            const videoUrl = URL.createObjectURL(file);
+            this.user.videos.push(videoUrl);
+            localStorage.setItem('userVideos', JSON.stringify(this.user.videos));
+        }
+    },
+
+
                 openModal(image) {
                     this.modalImage = image;
                     this.modalVisible = true;
