@@ -6,6 +6,32 @@
     <title>智能获奖证书验证系统</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        .back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #3498db;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+}
+
+.back-btn:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.container {
+    position: relative; /* 新增这一行保证定位正确 */
+    /* 原有其他样式保持不变 */
+}
         * {
             margin: 0;
             padding: 0;
@@ -176,6 +202,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="index.html" class="back-btn">← 返回</a>
         <h1>🏆 智能获奖证书验证系统</h1>
 
         <div class="upload-section">
