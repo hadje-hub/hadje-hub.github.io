@@ -1,91 +1,181 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大学生职业成长导航系统</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <div class="hander1">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#about">关于</a></li>
-                <li><a href="#career">职业建议</a></li>
-                <li><a href="#contact">联系我们</a></li>
-                </div>
-                <div class="hander2">
-                <li><a href="#">登录</a></li>
-                <li><a>||</a></li>
-                <li><a href="#">注册</a></li>
-                </div>
-            </ul>
-        </nav>
-    </header>
+:root {
+            --primary-color: #2A5CAA;
+            --secondary-color: #F0B429;
+            --text-dark: #2D3748;
+            --text-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    <section id="home" class="hero">
-        <h1>欢迎来到大学生职业成长导航系统</h1>
-        <p>帮助你规划职业未来，实现梦想！</p>
-    </section>
-    <div id="container">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', '微软雅黑', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
 
 
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #1A365D),
+                        url('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-blend-mode: multiply;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+#container{
+    width: 1200px;
+    height: 1400px;
+    margin-left: 120px;
+    margin-top: 40px;
+    background-color: #f4f4f4;
+    float:left;
+    position: relative;
+
+}
 
 
-    <section id="contact" class="contact">
-        <div class="from_s">
-        <h2>第一个部分：匹配你的职业</h2>
-        <div class="from1">
-            <h3>1）人格测试</h3>
-            <button type="text"><a href="https://www.16personalities.com/">📒点击进行MBTI人格测试</a></button>
-        </div>
-
-        <div class="from2">
-            <hr>
-            <h3>2）个人信息填写</h3>
-        <!-- 修改表单 action 指向一个处理逻辑 -->
-    <form id="contact-form" action="process_form.php" method="post">
-
-    <label for="name">姓名:</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="MBTI">测试的MBTI:</label>
-    <input type="text" id="MBTI" name="MBTI" required>
-
-    <label for="school">学校:</label>
-    <input type="text" id="school" name="school" required>
-
-    <label for="major">专业:</label>
-    <input type="text" id="major" name="major" required>
-
-    <label for="education_background">目前学历:</label>
-    <input type="text" id="education_background" name="education_background" required>
-
-    <label for="place">理想就职地:</label>
-    <input type="text" id="place" name="place" required>
-
-    <label for="career_idea">就职的意向:</label>
-    <textarea id="career_idea" name="career_idea" required></textarea>
-
-    <button type="submit">提交</button>
-</form>
-
-        </div>
-        </div>
-    </section>
-    </div>
-
-    <section id="about" class="about">
-        <h2>关于我们</h2>
-        <p>我们致力于为大学生提供职业规划建议，帮助你们找到适合自己的职业道路。</p>
-    </section>
-
-    <div class="footer1">
-        <p>&copy; 2025 大学生职业成长导航系统</p>
-    </div>
 
 
-</body>
-</html>
+
+.contact {
+    height: 1400px;
+    width: 100%;
+    background-color: #fff;
+    float: left;
+    position: relative;
+    z-index: 10;
+}
+
+
+.contact .from1{
+    width: 700px;
+    height: 350px;
+    margin-left: 200px;
+    margin-bottom: 40px;
+    float: left;
+    position: relative;
+
+}
+.contact .from1 h3{
+    font-size: 25px;
+}
+.contact .from1 a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.contact .from1 button{
+    background-color: #007BFF;
+    width: 330px;
+    height: 100px;
+    font-size: 24px;
+    color: #fff;
+    margin-left: 180px;
+    margin-top: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact .from1 button:hover {
+    background-color: #0056b3;
+}
+
+.contact .from2{
+    width: 1100px;
+    height: 760px;
+    margin-top: 30px;
+    margin-left: 50px;
+    float: left;
+    position: relative;
+
+}
+.contact .from2 hr{
+    border: 2px solid;
+}
+.from2 #contact-form{
+    margin-top: 40px;
+}
+
+.contact .from2 h3{
+    font-size: 25px;
+    margin-left: 160px;
+}
+
+.contact h2{
+    display: block;
+    padding: 50px 20px;
+
+}
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    margin-left: 250px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+
+
+.footer1{
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 40px 0px;
+    float: left;
+    position: relative;
+}
