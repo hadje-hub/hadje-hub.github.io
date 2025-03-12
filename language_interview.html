@@ -10,6 +10,26 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 10px 15px;
+            background-color: #4CAF50; /* 按钮背景色 */
+            color: white; /* 字体颜色 */
+            border: none;
+            border-radius: 25px; /* 圆角 */
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+            transition: background-color 0.3s, transform 0.3s; /* 平滑过渡 */
+            z-index: 10; /* 确保按钮在最上层 */
+        }
+
+        .back-button:hover {
+            background-color: #45a049; /* 鼠标悬停时按钮颜色 */
+            transform: translateY(-2px); /* 效果：向上抬起 */
+        }
 
         .bar{
             width: 700px;
@@ -83,6 +103,8 @@
     </style>
 </head>
 <body>
+<!-- 返回按钮 -->
+    <button class="back-button" onclick="window.location.href='index.html'">返回</button>
     <div class="bar">
     <h1>模拟面试</h1>
     <div class="timer" id="timer">剩余时间：10:00</div>
