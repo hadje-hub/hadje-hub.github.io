@@ -4,33 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>大学生职业成长导航系统</title>
-    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2A2A72;
+            --secondary-color: #009FFD;
+            --accent-color: #7B2CBF;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .return-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background: var(--secondary-color);
+        }
+
+        .hero {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .advice {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-bottom: 60px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .advice:hover {
+            transform: translateY(-5px);
+        }
+
+        .content a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 30px 0 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+        }
+
+        h4 {
+            color: var(--accent-color);
+            margin: 20px 0 15px;
+            font-size: 1.3rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 25px;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        ul li::before {
+            content: '•';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ddd, transparent);
+            margin: 25px 0;
+        }
+
+        .about {
+            background: var(--primary-color);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer1 {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: -1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .advice {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <div class="hander1">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#about">关于</a></li>
-                <li><a href="#career">职业建议</a></li>
-                <li><a href="#contact">联系我们</a></li>
-                </div>
-                <div class="hander2">
-                <li><a href="#">登录</a></li>
-                <li><a>||</a></li>
-                <li><a href="#">注册</a></li>
-                </div>
-            </ul>
-        </nav>
-    </header>
+    <a href="index.html" class="return-btn"><i class="fas fa-arrow-left"></i> 返回首页</a>
+
     <section id="home" class="hero">
-        <h1>欢迎来到大学生职业成长导航系统</h1>
-        <p>帮助你规划职业未来，实现梦想！</p>
+        <h1>个人个性化职业成长任务建议</h1>
     </section>
     <div id="container">
         <div class="advice">
-            <h2>第二个部分：个人个性化职业成长任务建议</h2>
+
             <div class="content">
                 <a>用户作为一名双非院校的计算机科学与技术专业大一新生，根据MBTI测试结果与IT工程师职业有80%的匹配，接下来我将给您一些成为IT工程师的建议，帮助你规划未来的学习和职业发展。
                     虽然学历在求职中是一个重要因素，但通过努力提升技术能力、积累项目经验、参加比赛和实习，完全可以弥补学历上的不足。</a>
@@ -163,10 +307,11 @@
     </section>
 
     <div class="footer1">
-        <p>&copy; 2023 大学生职业成长导航系统</p>
+        <p>&copy; 2025 大学生职业成长导航系统</p>
     </div>
 
 
     <script src="script.js"></script>
+
 </body>
 </html>
